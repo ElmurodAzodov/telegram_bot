@@ -1,14 +1,12 @@
-
 # pip install python-telegram-bot==13.7
 from requests import *
 from telegram import *
 from telegram.ext import *
 
-TOKEN = "6133697511:AAFpK4qkCyQ3c7-Pw1wD8wHHaEvuG1eFHPQ"
+TOKEN = "6069762613:AAEf6C36OQl7j8-HqKmCt-FQdcyUT6P7l2s"
 
 RANDOM_IMAGE = "Random image"
 GET_MP3 = "Get mp3"
-GET_MP4 = "Get mp4"
 RANDOM_IMG_URL = "https://picsum.photos/1200"
 
 # Declare IMAGE_COUNTER as a global variable
@@ -54,16 +52,11 @@ def _send_mp3(update: Update, context: CallbackContext):
     with open("music.mp3", "rb") as f:
         update.message.reply_audio(f, caption="This is mp3")
 
-def _send_mp4(update: Update, context: CallbackContext):
-    with open("video.mp4", "rb") as f:
-        update.message.reply_video(f, caption="This is mp4")
-
 
 def get_buttons(update: Update, context: CallbackContext):
     buttons = [
         [KeyboardButton(RANDOM_IMAGE)],
-        [KeyboardButton(GET_MP3)],
-        [KeyboardButton(GET_MP4)]
+        [KeyboardButton(GET_MP3)]
     ]
     context.bot.send_message(
         chat_id=update.effective_chat.id,
@@ -84,8 +77,6 @@ def message_handler(update: Update, context: CallbackContext):
         )
     elif update.message.text == GET_MP3:
         _send_mp3(update, context)
-    elif  update.message.text == GET_MP4:
-        _send_mp4(update, context)
 
 
 def help(update, context):
